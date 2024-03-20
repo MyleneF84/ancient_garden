@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  # get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # get 'admins/home'
+  devise_for :admins
 
-  # Defines the root path route ("/")
+  authenticated :admin do
+    root to: "admins#home", as: :admins_root
+  end
+
+  get "admins", to: "admins#home"
   root to: "pages#home"
+
 end
