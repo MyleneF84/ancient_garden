@@ -28,6 +28,9 @@
           <%= link_to admins_orders_path, class:"nav-link" do %>
             <%= icon("fa-solid", "truck-fast") %> <span>Orders</span>
           <% end %>
+          <%= link_to destroy_admin_session_path, data: {turbo_method: :delete}, class: "dropdown-item", class:"nav-link" do %>
+            <%= icon("fa-solid", "right-from-bracket") %> <span>Log out</span>
+          <% end %>
         </nav>
       </div>
       <div class="container mt-2">

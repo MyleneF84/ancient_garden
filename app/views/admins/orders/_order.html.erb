@@ -19,4 +19,27 @@
     <%= order.fulfilled %>
   </p>
 
+  <% if order.order_products.any?  %>
+    <strong>Products:</strong>
+    <div class="tabler esponsive">
+      <table class="table align-middle table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%  order.order_products.each do |op| %>
+          <tr>
+            <th scope="row"><%= op.product.name %></th>
+            <td><%= op.size  %></td>
+            <td><%= op.quantity %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>
