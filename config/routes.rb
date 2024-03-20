@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admins do
+    resources :categories
+  end
   # get 'admins/home'
   devise_for :admins
 

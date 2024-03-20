@@ -14,14 +14,23 @@
     <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
     <main class="d-flex">
-      <div class="adin-nav">
-        <nav class="nav flex-column">
-          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
+      <div class="admin-nav">
+        <nav class="nav flex-column sticky-top">
+          <%= link_to admins_path, class:"nav-link" do %>
+            <%= icon("fa-solid", "gauge-high") %> <span>Dashboard</span>
+          <% end %>
+          <%= link_to admins_path, class:"nav-link" do %>
+            <%= icon("fa-solid", "cart-shopping") %> <span>Products</span>
+          <% end %>
+          <%= link_to admins_categories_path, class:"nav-link" do %>
+            <%= icon("fa-solid", "list") %> <span>Categories</span>
+          <% end %>
+          <%= link_to admins_path, class:"nav-link" do %>
+            <%= icon("fa-solid", "truck-fast") %> <span>Orders</span>
+          <% end %>
         </nav>
       </div>
-      <div class="container">
+      <div class="container mt-2">
         <%= yield %>
       </div>
     </main>

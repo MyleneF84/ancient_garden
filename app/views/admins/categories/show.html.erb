@@ -1,0 +1,8 @@
+<%= render @admins_category %>
+
+<div>
+  <%= link_to "Edit this category", edit_admins_category_path(@admins_category) %> |
+  <%= link_to "Back to categories", admins_categories_path %>
+
+  <%= button_to "Destroy this category", [:admins, @admins_category], method: :delete %>
+</div>
