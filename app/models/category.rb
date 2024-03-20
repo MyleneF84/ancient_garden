@@ -4,5 +4,7 @@ class Category < ApplicationRecord
     attachable.variant :medium, resize_to_limit: [250, 250]
   end
 
+  has_many :products
+
   validates :name, :description, presence: true
 end

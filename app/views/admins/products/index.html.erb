@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between">
+  <h1>Products</h1>
+  <%= link_to "New product", new_admins_product_path, class:"btn btn-primary" %>
+</div>
+
+<div class="tabler esponsive">
+<table class="table align-middle table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admins_products.find_each do |product| %>
+    <tr>
+      <th scope="row"><%= product.id %></th>
+      <td><%= product.images.present? ? image_tag(product.images.first.variant(:thumb)) : image_tag("https://via.placeholder.com/100") %></td>
+      <td><%= link_to product.name, admins_product_path(product) %></td>
+      <td><%= product.description %></td>
+      <td><%= product.price %>$</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

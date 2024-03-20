@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admins do
-    resources :categories
-  end
   # get 'admins/home'
   devise_for :admins
 
@@ -10,6 +7,15 @@ Rails.application.routes.draw do
   end
 
   get "admins", to: "admins#home"
+  
   root to: "pages#home"
 
+  namespace :admins do
+    resources :categories
+    resources :products
+  end
+
+  namespace :admins do
+    resources :products
+  end
 end
