@@ -1,0 +1,13 @@
+
+<h1>Stocks</h1>
+
+<div id="admin_stocks">
+  <% @admins_stocks.each do |admin_stock| %>
+    <%= render admin_stock %>
+    <p>
+      <%= link_to "Show this stock", admins_product_stock_path(admin_stock.product, admin_stock) %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New stock", new_admins_product_stock_path %>

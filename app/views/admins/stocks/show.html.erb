@@ -1,0 +1,9 @@
+
+<%= render @admins_stock %>
+
+<div>
+  <%= link_to "Edit this stock", edit_admins_product_stock_path(@admins_product, @admins_stock) %> |
+  <%= link_to "Back to stocks", admins_product_stocks_path %>
+
+  <%= button_to "Destroy this stock", [:admins, @admins_stock.product, @admins_stock], method: :delete %>
+</div>

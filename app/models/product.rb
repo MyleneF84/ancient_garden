@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_many :stocks
   belongs_to :category
 
   has_many_attached :images do |attachable|

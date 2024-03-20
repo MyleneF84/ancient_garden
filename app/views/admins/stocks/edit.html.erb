@@ -1,0 +1,10 @@
+<h1>Editing stock</h1>
+
+<%= render "form", admin_stock: @admin_stock %>
+
+<br>
+
+<div>
+  <%= link_to "Show this stock", admins_product_stock_path(@admins_product, @admins_stock) %> |
+  <%= link_to "Back to stocks", admins_product_stocks_path %>
+</div>
