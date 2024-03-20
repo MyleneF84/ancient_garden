@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  # namespace :admin do
-  #   resources :stocks
-  # end
   devise_for :admins
 
   authenticated :admin do
@@ -13,6 +10,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   namespace :admins do
+    resources :orders
     resources :categories
     resources :products
   end
