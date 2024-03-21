@@ -1,1 +1,37 @@
-<h1>Admins#home</h1>
+<div class="">
+  <h2>Daily stats </h2>
+  <div class="row">
+    <div class="col-3">
+      <div class="card bg-secondary bg-gradient shadow-lg border-radius-lg" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Revenue</h5>
+          <p class="card-text"><%= @quick_stats[:revenue] ? @quick_stats[:revenue].to_s : "0" %>$</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Total Sales</h5>
+          <p class="card-text"><%= @quick_stats[:sales] ? @quick_stats[:sales] : "0" %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Average sales</h5>
+          <p class="card-text"><%= @quick_stats[:avg_sale] ? @quick_stats[:avg_sale].to_s : "0" %>$</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Item/Sale</h5>
+          <p class="card-text"><%= @quick_stats[:per_sale].to_i %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
