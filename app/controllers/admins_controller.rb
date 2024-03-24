@@ -28,5 +28,8 @@ class AdminsController < ApplicationController
 
       @revenue_by_day = complete_ordered_array_with_current_last
     end
+
+    @best_selling = OrderProduct.group(:product_id).order('SUM(quantity) DESC').sum(:quantity)
+    @best_selling = @best_selling.map { |k, v| [Product.find(k).name, v] }
   end
 end

@@ -1,15 +1,15 @@
-<div class="">
+<div>
   <h2>Daily stats </h2>
   <div class="row">
-    <div class="col-3">
-      <div class="card bg-secondary bg-gradient shadow-lg border-radius-lg" style="width: 18rem;">
+    <div class="col-sm-3">
+      <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Revenue</h5>
           <p class="card-text"><%= @quick_stats[:revenue] ? @quick_stats[:revenue].to_s : "0" %>$</p>
         </div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-sm-3">
       <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Total Sales</h5>
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-sm-3">
       <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Average sales</h5>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-sm-3">
       <div class="card bg-secondary bg-gradient shadow-lg" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">Item/Sale</h5>
@@ -37,12 +37,67 @@
 </div>
 
 <hr>
+<div data-controller="dashboard" data-dashboard-revenue-value="<%= @revenue_by_day.to_json %>" data-dashboard-best-selling-value="<%= @best_selling.to_json %>">
+  <div class="row py-2">
+    <div class="col-md-6 py-1">
+      <div class="card h-100 py-2" >
+        <h5 class="card-title text-center">Revenue</h5>
+        <div class="card-body d-flex align-items-center">
+          <canvas data-dashboard-target="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 py-1">
+      <div class="card h-100 py-2">
+        <h5 class="card-title text-center">Recent unfulfilled orders</h5>
+        <div class="card-body">
+          <div class="table responsive">
+            <table class="table align-middle table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Order ID</th>
+                  <th scope="col">Customer email</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @orders.each do |order| %>
+                <tr>
+                  <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
+                  <td><%= order.customer_email%></td>
+                  <td><%= order.created_at.strftime("%d %B %Y, %H:%M")  %></td>
+                  <td><%= order.total.to_s%></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-6">
-    <div class="card" data-controller="dashboard">
-      <div class="card-body">
-        <canvas id="revenueChart"></canvas>
+  <div class="row py-2">
+    <div class="col-md-4 py-1">
+      <div class="card h-100">
+        <div class="card-body">
+          <canvas data-dashboard-target="bestSellingDonut" ></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 py-1">
+      <div class="card h-100">
+        <div class="card-body d-flex align-items-center">
+          <canvas data-dashboard-target="fullfilementRatioBar"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 py-1">
+      <div class="card h-100">
+        <div class="card-body d-flex align-items-center">
+          <canvas data-dashboard-target="overviewBar"></canvas>
+        </div>
       </div>
     </div>
   </div>
