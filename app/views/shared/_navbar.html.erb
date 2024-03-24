@@ -28,6 +28,11 @@
         <li>
           <%= link_to "Login", new_admin_session_path, class: "nav-link" %>
         </li>
+        <li>
+          <%= link_to new_admin_session_path, class: "nav-link" do %>
+            <%= icon("fa-solid", "cart-shopping") %>
+          <% end %>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

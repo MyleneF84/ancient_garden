@@ -1,0 +1,11 @@
+<%= render "admins/categories/category", category: @category %>
+
+<% if @products.empty? %>
+  <h3>No products found</h3>
+<% else %>
+  <ul>
+    <% @products.each do |p| %>
+    <li><%= link_to p.name, product_path(p) %></li>
+    <% end %>
+  </ul>
+<% end %>

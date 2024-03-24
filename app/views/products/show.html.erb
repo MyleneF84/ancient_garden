@@ -1,0 +1,15 @@
+<%= render "admins/products/product", product: @product %>
+
+
+<div class="d-flex justify-content-between">
+  <div>
+  <% @product&.stocks.each do |stock| %>
+    <% if stock.amount > 0 %>
+      <button value="<%= stock.size %>" class="btn btn-primary"><%= stock.size %></button>
+    <% else %>
+      <button value="<%= stock.size %>" class="btn btn-primary" disabled><%= stock.size %></button>
+    <% end %>
+  <% end %>
+  </div>
+
+<button class="btn btn-primary btn-lg">Add to cart</button>

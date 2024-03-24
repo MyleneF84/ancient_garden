@@ -11,13 +11,13 @@ Rails.application.routes.draw do
 
   namespace :admins do
     resources :orders
+    resources :products do
+      resources :stocks
+    end
     resources :categories
-    resources :products
   end
 
-  namespace :admins do
-    resources :products do
-    resources :stocks
-    end
-  end
+  resources :categories, only: :show
+  resources :products, only: :show
+
 end
