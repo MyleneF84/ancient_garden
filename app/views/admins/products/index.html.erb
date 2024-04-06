@@ -4,13 +4,14 @@
 </div>
 
 <div class="tabler esponsive">
-<table class="table align-middle table-striped">
+<table class="table table-hover align-middle table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col"></th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
+      <th scope="col">Stocks</th>
       <th scope="col">Price</th>
     </tr>
   </thead>
@@ -18,10 +19,26 @@
     <% @admins_products.find_each do |product| %>
     <tr>
       <th scope="row"><%= product.id %></th>
-      <td><%= product.images.present? ? image_tag(product.images.first.variant(:thumb)) : image_tag("https://via.placeholder.com/100") %></td>
+      <td><%= product.images.present? ? image_tag(product.images.first.variant(:thumb), size: "100") : image_tag("https://via.placeholder.com/100") %></td>
       <td><%= link_to product.name, admins_product_path(product) %></td>
-      <td><%= product.description %></td>
-      <td><%= product.price %>$</td>
+      <td><%= truncate(product.description, length: 25, separator: "\n") %></td>
+      <td>
+      <% product.stocks.each do |s| %>
+        <ul class="list-unstyled">
+        <% condition = s.amount < 10 %>
+        <%= tag.li class: ("text-danger" if condition) do %>
+          <%= "#{s.size}: #{s.amount}" %>
+          <%= icon("fa-solid", "triangle-exclamation") if condition %>
+        <% end %>
+        </ul>
+      <% end %>
+      </td>
+      <td><% product.stocks.each do |s| %>
+        <ul class="list-unstyled">
+          <li><%= product.product_prices.where(size: s.size).pluck(:price).shift %></li>
+        </ul>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

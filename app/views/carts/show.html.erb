@@ -1,0 +1,9 @@
+<h1>Cart</h1>
+<div id="errorContainer"></div>
+<div data-controller="cart">
+  <div class="cart-buttons" id="total">
+    <%# <button  class="btn btn-primary">CheckOut</button> %>
+    <%= link_to "CheckOut", recap_path, class: "btn btn-primary" %>
+    <button data-action="click->cart#clear" class="btn btn-danger">Clear</button>
+  </div>
+</div>

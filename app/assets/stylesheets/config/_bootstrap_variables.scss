@@ -14,9 +14,10 @@ $font-size-base:         1rem;
 $body-color: $gray;
 $primary:    $blue;
 $success:    $green;
-$info:       $yellow;
+$info:       $oxblue;
 $danger:     $red;
 $warning:    $orange;
+$light:      $platinium;
 
 // Buttons & inputs' radius
 $border-radius:    2px;
@@ -27,3 +28,6 @@ $border-radius-sm: 2px;
 
 // Cards radius
 $card-border-radius: 5px;
+
+//Tables
+// $table-color: $platinium;

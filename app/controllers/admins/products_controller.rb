@@ -3,6 +3,10 @@ class Admins::ProductsController < AdminsController
 
   def index
     @admins_products = Product.all
+    if params[:query].present?
+      sql_subquery = "name ILIKE :query OR description ILIKE :query"
+      @admins_products = @admins_products.where(sql_subquery, query: "%#{params[:query]}%")
+    end
   end
 
   def show
@@ -10,9 +14,12 @@ class Admins::ProductsController < AdminsController
 
   def new
     @admins_product = Product.new
+    Product::SIZES.each { |size| @admins_product.product_prices.build(size: size) }
   end
 
   def edit
+    @admins_product = Product.find(params[:id])
+    Product::SIZES.each { |size| @admins_product.product_prices.build(size: size) } if @admins_product.product_prices.empty?
   end
 
   def create
@@ -42,12 +49,18 @@ class Admins::ProductsController < AdminsController
     redirect_to admins_products_path, notice: "Product was successfully destroyed."
   end
 
+  def delete_image_attachement
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    # head :ok
+  end
+
   private
     def set_admin_product
       @admins_product = Product.find(params[:id])
     end
 
     def admins_product_params
-      params.require(:product).permit(:name, :description, :price, :category_id, :active, images: [])
+      params.require(:product).permit(:name, :description, :price, :category_id, :active, product_prices_attributes: [:id, :size, :price], images: [])
     end
 end

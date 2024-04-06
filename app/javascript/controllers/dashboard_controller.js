@@ -4,11 +4,11 @@ import { Chart, registerables } from "chart.js"
 Chart.register(...registerables)
 
 export default class extends Controller {
-  static values = { revenue: Array, bestSelling: Array };
-  static targets = ["revenueChart", "bestSellingDonut", "overviewBar", "fullfilementRatioBar"];
+  static values = { revenue: Array, bestSelling: Array, fulfillementRatio: Array };
+  static targets = ["revenueChart", "bestSellingDonut", "overviewBar", "fulfillementRatioBar"];
 
   initialize() {
-    const colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d']
+    const colors = ['#2a9d8f','#f4a261','#1B263B','#c3e6cb','#dc3545','#6c757d']
 
     // line chart
     const data = this.revenueValue.map((item) => item[1])
@@ -21,11 +21,11 @@ export default class extends Controller {
       data: {
         labels: labels,
         datasets: [{
-          data: data,
           label: "Revenue $",
+          data: data,
           borderWidth: 3,
-          // borderColor: "#ee9b00",
-          // backgroundColor: "#f4d35e",
+          borderColor: colors[0],
+          backgroundColor: "rgba(255, 159, 64, 0.2)",
           fill: true
         }]
       },
@@ -74,7 +74,7 @@ export default class extends Controller {
               backgroundColor: colors.slice(0,3),
               borderWidth: 0,
               data: chDonutData,
-              label: "Best sellers"
+              label: 'Best sellers'
               }
             ],
           },
@@ -84,21 +84,29 @@ export default class extends Controller {
 
     // bar chart 1
 
-    const chBar1 = this.fullfilementRatioBarTarget;
+    const chBar1 = this.fulfillementRatioBarTarget;
+
+    const labelsDay = this.fulfillementRatioValue.map((item) => item[0])
+    const chBar1Data = this.fulfillementRatioValue.map((item) => item[1])
+    const chBarDataU = this.fulfillementRatioValue.map((item) => item[2])
+
+    console.log(this.revenueValue)
+    console.log(this.fulfillementRatioValue)
+
     if (chBar1) {
       new Chart(chBar1, {
       type: 'bar',
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: labelsDay,
         datasets: [{
-          data: [589, 445, 483, 503, 689, 692, 634],
+          data: chBar1Data,
           backgroundColor: colors[0],
-          label: "fulfilled"
+          label: "Fulfilled %"
         },
         {
-          data: [639, 465, 493, 478, 589, 632, 674],
+          data: chBarDataU,
           backgroundColor: colors[1],
-          label: "unfulfilled"
+          label: "Unfulfilled %"
         }]
       },
       options: {

@@ -1,15 +1,18 @@
 <%= render "admins/products/product", product: @product %>
 
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between" data-controller="products" data-products-product-value="<%= @product.to_json %>">
   <div>
   <% @product&.stocks.each do |stock| %>
     <% if stock.amount > 0 %>
-      <button value="<%= stock.size %>" class="btn btn-primary"><%= stock.size %></button>
+      <button data-action="click->products#selectSize" value="<%= stock.size %>" class="btn btn-primary"><%= stock.size %></button>
     <% else %>
       <button value="<%= stock.size %>" class="btn btn-primary" disabled><%= stock.size %></button>
     <% end %>
   <% end %>
   </div>
 
-<button class="btn btn-primary btn-lg">Add to cart</button>
+  <p data-products-target="selectedSize"></p>
+
+<button data-action="click->products#addToCart" class="btn btn-primary btn-lg">Add to cart</button>
+</div>

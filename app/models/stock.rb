@@ -1,5 +1,5 @@
 class Stock < ApplicationRecord
   belongs_to :product
 
-  SIZES = %w[Seeds(Pack) Seedling Plant]
+  SIZES = ["Seeds (Pack)", "Seedling", "Plant"]
 end

@@ -6,38 +6,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Home", (current_admin ? admins_root_path : root_path), class:"nav-link active"%>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <%= link_to "Log out", destroy_admin_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <%= link_to "Sign up", new_admin_registration_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "Login", new_admin_session_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to new_admin_session_path, class: "nav-link" do %>
-            <%= icon("fa-solid", "cart-shopping") %>
-          <% end %>
-        </li>
+        <%= render "shared/#{current_namespace}/navbar" %>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <% url = current_namespace.eql?("admins") ? admins_products_path : categories_path %>
+        <%= form_with url: url, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword"
+          %>
+          <%= submit_tag "Search", name: "", class: "btn btn-outline-info" %>
+        <% end %>
+      <p class="navbar-nav nav-item"><%= current_user&.email %></p>
     </div>
   </div>
 </nav>

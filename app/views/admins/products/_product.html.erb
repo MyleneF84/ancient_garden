@@ -1,4 +1,42 @@
-<div class="card mb-3" style="max-width: 540px;">
+
+  <div class="col-9 ">
+    <div class="card border-0 shadow-sm" >
+      <div class="card-top">
+        <% if product.images.attached? %>
+        <div id="carouselImageIndicators" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <% (0..product.images.size - 1).each do |i| %>
+            <button type="button" data-bs-target="#carouselImageIndicators" data-bs-slide-to="<%= i %>" class="active" aria-current="true" aria-label="Slide <%= i + 1 %>"></button>
+            <% end %>
+          </div>
+          <div class="carousel-inner" style="height: 500px;">
+            <% product.images.each do |img|  %>
+            <div class="carousel-item active">
+              <%= image_tag(img, class:"d-block w-100") %>
+            </div>
+            <% end %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselImageIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselImageIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      <% end %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= product.name %></h5>
+        <p class="card-text" style="white-space: pre-wrap;"><%= product.description %></p>
+        <p class="card-text">From: <%= product.prices.minmax.first %>$ to <%= product.prices.minmax.last %>$</p>
+      </div>
+    </div>
+  </div>
+
+
+<!--  <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
     <% if product.images.attached? %>
@@ -17,4 +55,4 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->

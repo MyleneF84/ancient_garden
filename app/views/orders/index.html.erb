@@ -1,0 +1,14 @@
+<h1>Your orders</h1>
+
+<% @orders.each do |order| %>
+<div class="row">
+  <div class="col">
+  <h3><%=link_to order.id, order_path(order) %></h3>
+  <% order.order_products.each do | product| %>
+  <p><%= Product.find(product.product_id).name %></p>
+  <p><%= product.size %></p>
+  <p><%= product.quantity %></p>
+ <% end %>
+ </div>
+</div>
+<% end %>

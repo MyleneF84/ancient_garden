@@ -3,7 +3,7 @@
   <%= link_to "New category", new_admins_category_path, class:"btn btn-primary" %>
 </div>
 
-<div class="table responsive">
+<!-- <div class="table responsive">
   <table class="table align-middle table-striped">
     <thead>
       <tr>
@@ -24,4 +24,23 @@
       <% end %>
     </tbody>
   </table>
+</div> -->
+
+<div class="row row-cols-1 row-cols-md-5 text-center">
+  <% @admins_categories.find_each do |category| %>
+  <div class="col my-3">
+  <div class="card" style="max-width: 250px;">
+    <div class="card-img-top">
+      <% if category.image.attached? %>
+        <%= image_tag(category.image.variant(:medium), class:"img-fluid rounded-start") %>
+      <% else %>
+        <%= image_tag("https://via.placeholder.com/250", class:"img-fluid rounded-start")  %>
+      <% end %>
+    </div>
+      <div class="card-body">
+        <p class="card-text text-center"><%= link_to category.name, admins_category_path(category) %></p>
+      </div>
+  </div>
+  </div>
+  <% end %>
 </div>

@@ -1,13 +1,12 @@
-<div class="container mt-2">
-  <div class="row row-cols-1 row-cols-md-2 g-4 py-3">
+<div class="container py-2">
+  <div class="row row-cols-1 row-cols-md-4 g-4 py-3">
     <% @categories.each do |category| %>
     <div class="col">
       <%= link_to category_path(category), class:"text-decoration-none" do %>
       <div class="card">
         <%= category.image.present? ? image_tag(category.image.variant(:large)) : image_tag("https://via.placeholder.com/300") %>
         <div class="card-body">
-          <h5 class="card-title"><%= category.name %></h5>
-          <p class="card-text"><%= category.description %></p>
+          <h5 class="card-title text-center"><%= category.name %></h5>
         </div>
       </div>
     <% end %>
@@ -16,17 +15,17 @@
   </div>
 </div>
 
-<div class="row">
+<div>
   <h3 class=text-center>Customers testimonials</h3>
+  <div class="card-group">
   <% 3.times do %>
-  <div class="col-4">
-    <div class="card">
+    <div class="card" >
       <div class="card-body">
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus delectus, Neque animi commodi optio,
-        eveniet perspiciatis qui necessitatibus! Voluptatibus accusantium aliquam quae quam! Aperiam, culpa placeat!</p>
+        eveniet perspiciatis qui necessitatibus!</p>
         <p class="text-muted"> -Olivia</p>
       </div>
     </div>
-  </div>
   <% end %>
+  </div>
 </div>
