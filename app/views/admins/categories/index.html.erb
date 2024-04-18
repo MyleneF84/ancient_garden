@@ -1,46 +1,25 @@
-<div class="d-flex justify-content-between">
-  <h1>Categories</h1>
+<div class="row d-flex justify-content-between">
+  <div class="col-6"><h1>Categories</h1></div>
+  <div class="col-6 text-end">
   <%= link_to "New category", new_admins_category_path, class:"btn btn-primary" %>
+  </div>
 </div>
 
-<!-- <div class="table responsive">
-  <table class="table align-middle table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"></th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @admins_categories.find_each do |category| %>
-      <tr>
-        <th scope="row"><%= category.id %></th>
-        <td><%= category.image.present? ? image_tag(category.image.variant(:thumb)) : image_tag("https://via.placeholder.com/100") %></td>
-        <td><%= link_to category.name, admins_category_path(category) %></td>
-        <td><%= category.description %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div> -->
-
-<div class="row row-cols-1 row-cols-md-5 text-center">
+<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 d-flex align-items-stretch px-5 py-4">
   <% @admins_categories.find_each do |category| %>
-  <div class="col my-3">
-  <div class="card" style="max-width: 250px;">
-    <div class="card-img-top">
-      <% if category.image.attached? %>
-        <%= image_tag(category.image.variant(:medium), class:"img-fluid rounded-start") %>
-      <% else %>
-        <%= image_tag("https://via.placeholder.com/250", class:"img-fluid rounded-start")  %>
-      <% end %>
-    </div>
-      <div class="card-body">
-        <p class="card-text text-center"><%= link_to category.name, admins_category_path(category) %></p>
+  <div class="col d-flex justify-content-center my-3">
+    <div class="card h-100 border-0 shadow" style="max-width: 250px;">
+      <div class="card-img-top ">
+        <% if category.image.attached? %>
+          <%= image_tag(category.image.variant(:medium), class:"img-fluid rounded") %>
+        <% else %>
+          <%= image_tag("https://via.placeholder.com/250", class:"img-fluid rounded-start")  %>
+        <% end %>
       </div>
-  </div>
+      <div class="card-body d-flex flex-column">
+        <p class="card-text text-center flex-grow-1"><%= link_to category.name, admins_category_path(category) %></p>
+      </div>
+    </div>
   </div>
   <% end %>
 </div>

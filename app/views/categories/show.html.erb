@@ -3,9 +3,20 @@
 <% if @products.empty? %>
   <h3>No products found</h3>
 <% else %>
-  <ul>
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 justify-content-center mx-2">
     <% @products.each do |p| %>
-    <li><%= link_to p.name, product_path(p) %></li>
+    <div class="col d-flex justify-content-center my-2">
+      <%= link_to product_path(p), class: "text-decoration-none" do %>
+      <div class="card card-product">
+        <div class="card-img-top">
+          <%= image_tag(p.images.first.variant(:medium), class:"img-fluid rounded") %>
+        </div>
+        <div class="card-body text-center">
+          <p><%= p.name %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
     <% end %>
-  </ul>
+  </div>
 <% end %>

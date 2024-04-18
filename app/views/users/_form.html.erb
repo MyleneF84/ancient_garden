@@ -1,0 +1,11 @@
+<%= simple_form_for current_user, url: profile_path, html: { class: "d-none", data: { edit_profile_target: "form", action: "submit->edit_profile#update"} } do |f| %>
+  <div class="form-input my-3" data-controller="image-preview">
+    <div class="d-flex align-items-center justify-content-between">
+      <%= f.input :avatar, as: :file, input_html: { class: "d-none", data: { image_preview_target: "input", action:"change->image-preview#displayPreview" }},
+      label_html: { class: "upload-photo"}, label: (current_user.avatar.present? ?  "📷 Update your avatar" : "📷 Upload an avatar") %>
+      <%= image_tag "", width: 200, class: "hidden", data: { image_preview_target: "preview" } %>
+    </div>
+    <%= f.input :address, input_html: {value: current_user.address ||= current_user.orders.last.address} %>
+  </div>
+  <%= f.submit "Done", class: "btn btn-primary"%>
+<% end %>

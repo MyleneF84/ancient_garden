@@ -9,7 +9,7 @@
         <%= render "shared/#{current_namespace}/navbar" %>
       </ul>
       <% url = current_namespace.eql?("admins") ? admins_products_path : categories_path %>
-        <%= form_with url: url, method: :get, class: "d-flex" do %>
+        <%= form_with url: url, method: :get, class: "d-flex me-2" do %>
           <%= text_field_tag :query,
               params[:query],
               class: "form-control",
@@ -17,7 +17,9 @@
           %>
           <%= submit_tag "Search", name: "", class: "btn btn-outline-info" %>
         <% end %>
-      <p class="navbar-nav nav-item"><%= current_user&.email %></p>
+        <%= link_to profile_path do %>
+          <%= image_tag(current_user&.avatar.variant(:nav), class: "avatar-bordered") %>
+        <% end %>
     </div>
   </div>
 </nav>

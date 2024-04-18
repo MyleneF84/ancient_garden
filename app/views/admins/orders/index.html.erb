@@ -1,51 +1,61 @@
-<div class="d-flex justify-content-end">
-  <%= link_to "New order", new_admins_order_path, class:"btn btn-primary" %>
+<div class="row d-flex justify-content-between">
+  <div class="col-6"><h1>Unfulfilled orders</h1></div>
+  <div class="col-6 text-end">
+    <%= link_to "New order", new_admins_order_path, class:"btn btn-primary" %>
+  </div>
 </div>
 
-<h3 class="text-center">Unfulfilled orders</h3>
-<div class="table responsive">
-  <table class="table align-middle table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Order ID</th>
-        <th scope="col">Customer email</th>
-        <th scope="col">Address</th>
-        <th scope="col">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @unfulfilled_orders.each do |order| %>
-      <tr>
-        <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
-        <td><%= order.customer_email%></td>
-        <td><%= order.address  %></td>
-        <td><%= order.total%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="container px-5 py-4">
+  <div class="table responsive">
+    <table class="table align-middle table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order ID</th>
+          <th scope="col">Customer email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unfulfilled_orders.each do |order| %>
+        <tr>
+          <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
+          <td><%= order.user.email%></td>
+          <td><%= order.address  %></td>
+          <td><%= order.total%></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 <hr>
-<h3 class="text-center">Fulfilled orders</h3>
-<div class="table responsive">
-  <table class="table table-success align-middle table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Order ID</th>
-        <th scope="col">Customer email</th>
-        <th scope="col">Address</th>
-        <th scope="col">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @fulfilled_orders.each do |order| %>
-      <tr>
-        <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
-        <td><%= order.customer_email%></td>
-        <td><%= order.address  %></td>
-        <td><%= order.total%></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+<div class="row">
+  <div class="col"><h1>Fulfilled orders</h1></div>
+</div>
+
+<div class="container px-5 py-4">
+  <div class="table responsive">
+    <table class="table table-success align-middle table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order ID</th>
+          <th scope="col">Customer email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fulfilled_orders.each do |order| %>
+        <tr>
+          <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
+          <td><%= order.user.email%></td>
+          <td><%= order.address  %></td>
+          <td><%= order.total%></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

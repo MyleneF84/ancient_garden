@@ -1,11 +1,9 @@
 <%= simple_form_for([:admins, @admins_category]) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
+  <div class="form-inputs" data-controller="image-preview">
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.file_field :image %>
+    <%= image_tag "", width: 200, class: "hidden", data: { image_preview_target: "preview" } %>
+    <%= f.input :image, as: :file, input_html: { class: 'd-none', data: { image_preview_target: "input", action:"change->image-preview#displayPreview"  }}, label_html: { class: "upload-photo"}, label: "📷 Upload an image"  %>
   </div>
 
   <div class="form-actions">

@@ -6,5 +6,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+  has_one_attached :avatar, dependent: :destroy do |attachable|
+    attachable.variant :nav, resize_to_fill: [40, 40]
+    attachable.variant :thumb, resize_to_fill: [100, 100]
+  end
 
 end

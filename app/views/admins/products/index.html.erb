@@ -1,46 +1,52 @@
-<div class="d-flex justify-content-between">
-  <h1>Products</h1>
-  <%= link_to "New product", new_admins_product_path, class:"btn btn-primary" %>
+<div class="row d-flex justify-content-between">
+  <div class="col-6"><h1>Products</h1></div>
+  <div class="col-6 text-end">
+    <%= link_to "New product", new_admins_product_path, class:"btn btn-primary" %>
+  </div>
 </div>
 
-<div class="tabler esponsive">
-<table class="table table-hover align-middle table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col"></th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Stocks</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @admins_products.find_each do |product| %>
-    <tr>
-      <th scope="row"><%= product.id %></th>
-      <td><%= product.images.present? ? image_tag(product.images.first.variant(:thumb), size: "100") : image_tag("https://via.placeholder.com/100") %></td>
-      <td><%= link_to product.name, admins_product_path(product) %></td>
-      <td><%= truncate(product.description, length: 25, separator: "\n") %></td>
-      <td>
-      <% product.stocks.each do |s| %>
-        <ul class="list-unstyled">
-        <% condition = s.amount < 10 %>
-        <%= tag.li class: ("text-danger" if condition) do %>
-          <%= "#{s.size}: #{s.amount}" %>
-          <%= icon("fa-solid", "triangle-exclamation") if condition %>
+<div class="container px-5 py-4">
+  <div class="table responsive">
+    <table class="table table-hover align-middle table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" class="d-none d-md-table-cell"></th>
+          <th scope="col">Name</th>
+          <th scope="col" class="d-none d-md-table-cell">Description</th>
+          <th scope="col">Stocks</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admins_products.find_each do |product| %>
+        <tr>
+          <th scope="row"><%= product.id %></th>
+          <td class="d-none d-md-table-cell"><%= product.images.present? ? image_tag(product.images.first.variant(:thumb), size: "100") : image_tag("https://via.placeholder.com/100") %></td>
+          <td><%= link_to product.name, admins_product_path(product) %></td>
+          <td class="d-none d-md-table-cell"><%= truncate(product.description, length: 25, separator: "\n") %></td>
+          <td>
+          <% product.stocks.each do |s| %>
+          <%= link_to admins_product_stocks_path(product), class:"text-decoration-none text-black" do%>
+            <ul class="list-unstyled">
+            <% condition = s.amount < 10 %>
+            <%= tag.li class: ("text-danger" if condition) do %>
+              <%= "#{s.size}: #{s.amount}" %>
+              <%= icon("fa-solid", "triangle-exclamation") if condition %>
+            <% end %>
+            </ul>
+            <% end %>
+          <% end %>
+          </td>
+          <td><% product.stocks.each do |s| %>
+            <ul class="list-unstyled">
+              <li><%= product.product_prices.where(size: s.size).pluck(:price).shift %></li>
+            </ul>
+            <% end %>
+          </td>
+        </tr>
         <% end %>
-        </ul>
-      <% end %>
-      </td>
-      <td><% product.stocks.each do |s| %>
-        <ul class="list-unstyled">
-          <li><%= product.product_prices.where(size: s.size).pluck(:price).shift %></li>
-        </ul>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
 </div>

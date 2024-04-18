@@ -1,0 +1,20 @@
+.pagination {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+}
+
+.page-link:hover {
+  color :$primary;
+}
+
+.page-item.active .page-link {
+  background-color: $info;
+  border-color: $light;
+}
+
+.page-link {
+  color: $info;
+}

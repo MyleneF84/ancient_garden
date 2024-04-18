@@ -2,10 +2,12 @@
 
 
 <div class="d-flex justify-content-between" data-controller="products" data-products-product-value="<%= @product.to_json %>">
-  <div>
-  <% @product&.stocks.each do |stock| %>
+
+  <div >
+  <% @product.stocks.each do |stock| %>
     <% if stock.amount > 0 %>
-      <button data-action="click->products#selectSize" value="<%= stock.size %>" class="btn btn-primary"><%= stock.size %></button>
+      <button data-products-product-price-value="<%= @product.product_prices.where(size: stock.size).pluck(:price).first %>"
+      data-action="click->products#selectSize" value="<%= stock.size %>" class="btn btn-primary"><%= stock.size %></button>
     <% else %>
       <button value="<%= stock.size %>" class="btn btn-primary" disabled><%= stock.size %></button>
     <% end %>

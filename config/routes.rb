@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'users/profile'
   devise_for :users
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 
   get 'checkouts/create'
 
@@ -27,6 +30,9 @@ Rails.application.routes.draw do
   resources :orders, only: %i[new create show index]
   resources :categories, only: %i[show index]
   resources :products, only: :show
+
+  get "profile", to: "users#profile"
+  patch "profile", to: "users#update"
 
   get "cart", to: "carts#show"
   post "orders/checkout", to: "orders#create"

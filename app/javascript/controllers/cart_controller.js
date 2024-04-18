@@ -54,6 +54,4 @@ export default class extends Controller {
     window.location.reload()
   }
 
-
-
 }

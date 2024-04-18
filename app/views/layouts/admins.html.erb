@@ -14,26 +14,24 @@
     <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
     <main class="row g-0">
-      <div class="col-2 admin-nav bg-dark ">
-      <%# <div class="admin-nav bg-dark"> %>
-        <nav class="nav flex-column ps-3 mt-2 sticky-top">
+      <div class="col-2 admin-nav bg-dark d-flex justify-content-center pt-3">
+        <nav class="nav flex-column px-md-3 px-sm-0  mt-2 sticky-top">
           <%= link_to admins_path, class:"nav-link" do %>
-            <%= icon("fa-solid", "gauge-high") %> <span>Dashboard</span>
+          <div class="nav-item d-flex align-items-center"><%= icon("fa-solid", "gauge-high") %> <span class="ms-1 d-none d-md-block">Dashboard</span></div>
           <% end %>
           <%= link_to admins_products_path, class:"nav-link" do %>
-            <%= icon("fa-solid", "cart-shopping") %> <span>Products</span>
+            <div class="nav-item d-flex align-items-center"><%= icon("fa-solid", "cart-shopping") %> <span class="ms-1 d-none d-md-block">Products</span></div>
           <% end %>
           <%= link_to admins_categories_path, class:"nav-link" do %>
-            <%= icon("fa-solid", "list") %> <span>Categories</span>
+            <div class="nav-item d-flex align-items-center"><%= icon("fa-solid", "list") %> <span class="ms-1 d-none d-md-block">Categories</span></div>
           <% end %>
           <%= link_to admins_orders_path, class:"nav-link" do %>
-            <%= icon("fa-solid", "truck-fast") %> <span>Orders</span>
+            <div class="nav-item d-flex align-items-center"><%= icon("fa-solid", "truck-fast") %> <span class="ms-1 d-none d-md-block">Orders</span></div>
           <% end %>
           <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item", class:"nav-link" do %>
-            <%= icon("fa-solid", "right-from-bracket") %> <span>Log out</span>
+            <div class="nav-item d-flex align-items-center"><%= icon("fa-solid", "right-from-bracket") %> <span class="ms-1 d-none d-md-block">Log out</span></div>
           <% end %>
         </nav>
-      <%# </div> %>
       </div>
       <div class="col-10">
       <div class="container mt-2 p-3">

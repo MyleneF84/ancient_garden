@@ -1,9 +1,9 @@
-<div class="container py-2">
-  <div class="row row-cols-1 row-cols-md-4 g-4 py-3">
+<div class="container py-2 my-3">
+  <div class="row row-cols-1 row-cols-md-3 g-4 py-3">
     <% @categories.each do |category| %>
-    <div class="col">
+    <div class="col d-flex justify-content-center">
       <%= link_to category_path(category), class:"text-decoration-none" do %>
-      <div class="card">
+      <div class="card h-100 border-0 shadow" style="max-width: 300px;">
         <%= category.image.present? ? image_tag(category.image.variant(:large)) : image_tag("https://via.placeholder.com/300") %>
         <div class="card-body">
           <h5 class="card-title text-center"><%= category.name %></h5>
@@ -15,17 +15,31 @@
   </div>
 </div>
 
-<div>
-  <h3 class=text-center>Customers testimonials</h3>
-  <div class="card-group">
-  <% 3.times do %>
-    <div class="card" >
-      <div class="card-body">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus delectus, Neque animi commodi optio,
-        eveniet perspiciatis qui necessitatibus!</p>
-        <p class="text-muted"> -Olivia</p>
-      </div>
+<div class= "container-fluid full-width bg-light">
+  <div class="row g-2 py-3 justify-content-center align-items-center">
+    <h3 class="text-center mb-3">Customers testimonials</h3>
+    <div class="col-8 d-flex justify-content-around">
+        <div class="card-testimonial py-2 px-auto" style="width: 20rem; height: 14rem;" >
+          <div class="card-body">
+            <p>"I never knew the power of medicinal plants until I discovered this website!
+              Their products are pure magic, bringing natural healing and vitality into my life every day."</p>
+            <p class="text-muted"> -Olivia</p>
+          </div>
+        </div>
+        <div class="card-testimonial py-2 px-auto" style="width: 20rem; height: 14rem;" >
+          <div class="card-body">
+            <p>"As a holistic health enthusiast, I'm thrilled to have found this treasure trove of medicinal plants.
+              From soothing teas to potent extracts, each product delivers nature's goodness right to my doorstep!"</p>
+            <p class="text-muted"> -Marco</p>
+          </div>
+        </div>
+        <div class="card-testimonial py-2 px-auto" style="width: 20rem; height: 14rem;" >
+          <div class="card-body">
+            <p>"This website is a game-changer for anyone seeking wellness the natural way.
+              With their top-quality medicinal plants, I've experienced a newfound sense of balance and vitality. Highly recommended!"</p>
+            <p class="text-muted"> -Emmanuel</p>
+          </div>
+        </div>
     </div>
-  <% end %>
   </div>
 </div>

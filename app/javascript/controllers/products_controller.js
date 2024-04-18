@@ -2,11 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="products"
 export default class extends Controller {
-  static values = {size: String, product: Object};
+  static values = {size: String, product: Object, productPrice: Number};
   static targets = ["selectedSize"]
 
   addToCart() {
     console.log("product :", this.productValue)
+    console.log("productPrice :",  this.productPriceValue)
+    console.log("productSize :", this.sizeValue)
     const cart = localStorage.getItem("cart")
     if (cart) {
       const cartArray = JSON.parse(cart)
@@ -17,7 +19,7 @@ export default class extends Controller {
         cartArray.push({
           id: this.productValue.id,
           name: this.productValue.name,
-          price: this.productValue.price,
+          price: this.productPriceValue,
           size: this.sizeValue,
           quantity: 1
         })
@@ -28,7 +30,7 @@ export default class extends Controller {
       cartArray.push({
         id: this.productValue.id,
         name: this.productValue.name,
-        price: this.productValue.price,
+        price: this.productPriceValue,
         size: this.sizeValue,
         quantity: 1
       })
@@ -38,6 +40,7 @@ export default class extends Controller {
 
   selectSize(e) {
     this.sizeValue = e.target.value
-    this.selectedSizeTarget.innerText = `Selected size: ${this.sizeValue}`
+    this.productPriceValue = e.target.dataset.productsProductPriceValue
+    this.selectedSizeTarget.innerText = `Selected size: ${this.sizeValue} (${this.productPriceValue}$)`
   }
 }

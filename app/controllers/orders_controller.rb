@@ -1,6 +1,20 @@
 class OrdersController < ApplicationController
   def index
-    @orders = current_user.orders
+    case params[:tab]
+    when "this_week"
+      @orders = current_user.orders.this_week.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.this_week.order(created_at: :desc)
+    when "paid"
+      @orders = current_user.orders.paid.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.paid.order(created_at: :desc)
+    when "pending"
+      @orders = current_user.orders.pending.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.pending.order(created_at: :desc)
+    else
+      params[:tab] = "all"
+      @orders = current_user.orders.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.order(created_at: :desc)
+    end
   end
 
   def show
@@ -10,13 +24,11 @@ class OrdersController < ApplicationController
   def create
     puts cart = params[:cart]
 
-    @order = Order.create!(customer_email: current_user.email, address: "123 jump street", total: params[:total] ,
-    fulfilled: false, user_id: current_user.id)
+    @order = Order.create!( total: params[:total], fulfilled: false, user_id: current_user.id)
 
     cart.each do |product|
     OrderProduct.create!(order_id: @order.id, product_id: product["id"], size: product["size"], quantity: product["quantity"])
     end
-
 
     line_items = cart.map do |item|
       product = Product.find(item["id"])
@@ -40,17 +52,16 @@ class OrdersController < ApplicationController
       }
     end
 
-    # puts "#{line_items}"
-
     session = Stripe::Checkout::Session.create(
       mode: "payment",
       line_items: line_items,
       success_url: success_url,
       cancel_url: "http://localhost:3000/cancel",
       shipping_address_collection: {
-        allowed_countries: ['US', 'CA']
+        allowed_countries: ['US', 'CA', 'FR']
       }
     )
+
 
     @order.update!(checkout_session_id: session.id)
 
