@@ -17,8 +17,10 @@
           %>
           <%= submit_tag "Search", name: "", class: "btn btn-outline-info" %>
         <% end %>
-        <%= link_to profile_path do %>
-          <%= image_tag(current_user&.avatar.variant(:nav), class: "avatar-bordered") %>
+        <% if user_signed_in? %>
+          <%= link_to profile_path do %>
+            <%= image_tag(current_user.avatar.variant(:nav), class: "avatar-bordered") %>
+          <% end %>
         <% end %>
     </div>
   </div>

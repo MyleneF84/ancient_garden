@@ -19,14 +19,6 @@ class Order < ApplicationRecord
     state == "pending"
   end
 
-  def is_paid
-    where(state: "paid")
-  end
-
-  def is_pending
-    where(state: "pending")
-  end
-
   def this_week
     where(created_at: 1.week.ago.beginning_of_week..Date.today)
   end

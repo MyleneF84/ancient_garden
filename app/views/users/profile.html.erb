@@ -9,7 +9,7 @@
     </div>
     <div class="card border-0" data-edit-profile-target="infos">
       <p><strong>Email :</strong> <%= current_user.email %></p>
-      <p><strong>Adress :</strong> <%= current_user.address ||= current_user.orders.last.address %></p>
+      <p><strong>Adress :</strong> <%= current_user.address.values.join(' ') ||= current_user.orders.last.address %></p>
       <p><strong>Orders :</strong> <%= current_user.orders.size %> since <%= current_user.orders.first.created_at.strftime("%B %Y") %></p>
     </div>
     <%= render "form" %>

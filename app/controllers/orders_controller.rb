@@ -3,17 +3,26 @@ class OrdersController < ApplicationController
     case params[:tab]
     when "this_week"
       @orders = current_user.orders.this_week.order(created_at: :desc).page(params[:page])
-      @orders_total = current_user.orders.this_week.order(created_at: :desc)
+      @orders_total = current_user.orders.this_week
+    when "this_month"
+      @orders = current_user.orders.this_month.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.this_month
+    when "last_three_months"
+      @orders = current_user.orders.last_three_months.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.last_three_months
+    when "last_year"
+      @orders = current_user.orders.last_year.order(created_at: :desc).page(params[:page])
+      @orders_total = current_user.orders.last_year
     when "paid"
       @orders = current_user.orders.paid.order(created_at: :desc).page(params[:page])
-      @orders_total = current_user.orders.paid.order(created_at: :desc)
+      @orders_total = current_user.orders.paid
     when "pending"
       @orders = current_user.orders.pending.order(created_at: :desc).page(params[:page])
-      @orders_total = current_user.orders.pending.order(created_at: :desc)
+      @orders_total = current_user.orders.pending
     else
       params[:tab] = "all"
       @orders = current_user.orders.order(created_at: :desc).page(params[:page])
-      @orders_total = current_user.orders.order(created_at: :desc)
+      @orders_total = current_user.orders
     end
   end
 
