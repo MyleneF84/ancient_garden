@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<h5><%= @orders_total.count %> orders</h5>
+<h5><%= @orders_total.size %> orders</h5>
 
 <% @orders.each do |order| %>
   <div class="row justify-content-center my-2">
@@ -53,4 +53,4 @@
   </div>
 <% end %>
 
-<%= paginate @orders, window: 2 %>
+<%= @orders_total.size > 10 ? paginate(@orders, window: 2) : content_tag(:div, '', class: 'row my-3')%>
