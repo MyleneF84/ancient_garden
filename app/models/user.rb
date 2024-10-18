@@ -14,4 +14,22 @@ class User < ApplicationRecord
     attachable.variant :nav, resize_to_fill: [40, 40]
     attachable.variant :thumb, resize_to_fill: [100, 100]
   end
+
+  def display_avatar(variant)
+    avatar.attached? ? avatar.variant(variant) : default_avatar_image(variant)
+  end
+
+  private
+
+  def default_avatar_image(variant)
+    size = case variant
+    when :nav
+      40
+    when :thumb
+      100
+    else
+     100
+    end
+    "https://via.placeholder.com/#{size}"
+  end
 end

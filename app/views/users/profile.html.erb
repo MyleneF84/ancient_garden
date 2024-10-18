@@ -1,7 +1,7 @@
 <h1>Your profile</h1>
 <div class="row mt-4">
   <div class="col-md-3 text-center">
-    <%= image_tag((current_user.avatar.present? ? current_user.avatar.variant(:thumb) : "https://via.placeholder.com/100"), style: "border-radius: 50px") %>
+    <%= image_tag(current_user.display_avatar(:thumb), style: "border-radius: 50px") %>
   </div>
   <div class="col-5" data-controller="edit-profile" data-edit-profile-target="card">
     <div class="d-flex justify-content-end">
@@ -9,8 +9,8 @@
     </div>
     <div class="card border-0" data-edit-profile-target="infos">
       <p><strong>Email :</strong> <%= current_user.email %></p>
-      <p><strong>Adress :</strong> <%= current_user.address.values.join(' ') ||= current_user.orders.last.address %></p>
-      <p><strong>Orders :</strong> <%= current_user.orders.size %> since <%= current_user.orders.first.created_at.strftime("%B %Y") %></p>
+      <p><strong>Adress :</strong> <%= current_user.address.values.join(' ') || current_user.orders.last.address %></p>
+      <p><strong>Orders :</strong> <%= current_user.orders.size %> <%= current_user.orders.present? ? "since" : "" %> <%= current_user.orders.first&.created_at&.strftime("%B %Y")%></p>
     </div>
     <%= render "form" %>
   </div>
