@@ -23,4 +23,8 @@ class Order < ApplicationRecord
     where(created_at: 1.week.ago.beginning_of_week..Date.today)
   end
 
+  def customer_email
+    user.email
+  end
+
 end

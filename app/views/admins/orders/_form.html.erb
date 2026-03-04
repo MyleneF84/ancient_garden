@@ -1,8 +1,15 @@
+<div>
+  <p><%= @admins_order.customer_email %></p>
+  <p><%= @admins_order.address %></p>
+  <p><%= @admins_order.total %></p>
+</div>
+
+
 <%= simple_form_for([:admins, @admins_order]) do |f| %>
   <div class="form-inputs">
-    <%= f.input :user %>
-    <%= f.input :address %>
-    <%= f.input :total %>
+    <%# <%= f.input :user_id, disabled: true, collection: User.all, label_method: :email %>
+    <%# <%= f.input :address, disabled: true %>
+    <%# <%= f.input :total, disabled: true %>
     <%= f.input :fulfilled %>
   </div>
 

@@ -20,7 +20,7 @@
         <% @unfulfilled_orders.each do |order| %>
         <tr>
           <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
-          <td><%= order.user.email%></td>
+          <td><%= order.customer_email%></td>
           <td><%= order.address  %></td>
           <td><%= order.total%></td>
         </tr>
@@ -50,7 +50,7 @@
         <% @fulfilled_orders.each do |order| %>
         <tr>
           <th scope="row"><%= link_to order.id, admins_order_path(order) %></th>
-          <td><%= order.user.email%></td>
+          <td><%= order.customer_email %></td>
           <td><%= order.address  %></td>
           <td><%= order.total%></td>
         </tr>
